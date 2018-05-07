@@ -6,6 +6,11 @@
     $.parts(params.namespace).operatorRole,
     $.parts(params.namespace).operatorRoleBinding,
     $.parts(params.namespace).crd,
+    $.parts(params.namespace).uiRole,
+    $.parts(params.namespace).uiRoleBinding,
+    $.parts(params.namespace).uiService(params.tfJobUiServiceType),
+    $.parts(params.namespace).uiServiceAccount,
+    $.parts(params.namespace).ui(params.tfJobImage),
   ],
 
   parts(namespace):: {
@@ -108,19 +113,9 @@
         "alpha.kubernetes.io/nvidia-gpu": {
           volumes: [
             {
-              name: "lib",
-              mountPath: "/usr/local/nvidia/lib64",
-              hostPath: "/usr/lib/nvidia-384",
-            },
-            {
-              name: "bin",
-              mountPath: "/usr/local/nvidia/bin",
-              hostPath: "/usr/lib/nvidia-384/bin",
-            },
-            {
-              name: "libcuda",
-              mountPath: "/usr/lib/x86_64-linux-gnu/libcuda.so.1",
-              hostPath: "/usr/lib/x86_64-linux-gnu/libcuda.so.1",
+              name: "nvidia",
+              mountPath: "/usr/local/nvidia",
+              hostPath: "/usr/local/nvidia",
             },
           ],
         },
